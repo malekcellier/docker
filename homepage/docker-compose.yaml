@@ -2,15 +2,17 @@ version: "3"
 
 # More info at https://github.com/gethomepage/homepage
 services:
-  pihole:
+  homepage:
     container_name: homepage
     image: ghcr.io/gethomepage/homepage:latest
+    env_file:
+     - '/volume1/docker/.env'
     environment:
       PUID: ${PUID}
       PGID: ${PGID}
     ports:      
       - "3000:3000"
     volumes:
-      - 'data/app/config:/app/config'
+      - './data/app/config:/app/config'
       - '/var/run/docker.sock:/var/run/docker.sock:ro' # optional, for docker integrations
     restart: unless-stopped
