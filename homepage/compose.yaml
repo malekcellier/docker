@@ -1,0 +1,16 @@
+version: "3"
+
+# More info at https://github.com/gethomepage/homepage
+services:
+  pihole:
+    container_name: homepage
+    image: ghcr.io/gethomepage/homepage:latest
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+    ports:      
+      - "3000:3000"
+    volumes:
+      - 'data/app/config:/app/config'
+      - '/var/run/docker.sock:/var/run/docker.sock:ro' # optional, for docker integrations
+    restart: unless-stopped
